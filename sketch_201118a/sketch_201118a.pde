@@ -6,7 +6,7 @@ int terningeKast;
 
 void setup() {
   size(500, 300); 
-
+  //Anonym indre klasse 
   buttonTerning6.addAction(new Action() {   
     public void execute() {
       terningeKast = int(random(1, 6));
@@ -35,6 +35,6 @@ void draw() {
 }
 
 void mousePressed() {
-  buttonTerning6.click();
-  buttonTerning10.click();
+  buttonTerning6.click(mouseX,mouseY);
+  buttonTerning10.click(mouseX,mouseY);
 }

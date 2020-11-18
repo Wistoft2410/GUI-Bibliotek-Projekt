@@ -1,3 +1,1 @@
-interface Action {
-  void execute();
-}
+interface Action { void execute(); }

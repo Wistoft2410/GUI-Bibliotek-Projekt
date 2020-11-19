@@ -1,5 +1,6 @@
 class Button {
-  Action a;
+  Action a; //strategy
+
 
   int x, y, w, h;
   String name; 
@@ -14,7 +15,7 @@ class Button {
     h = tempH;
     name = tempName;
   }
-
+  //anonym klasse / ConcreteStrategies 
   void addAction(Action a) {
     this.a = a; //this. fordi at jeg referer til den den værdi (a), som hører til datatypen "Action".
   }
@@ -23,8 +24,7 @@ class Button {
     fill(255);
     rect(x, y, w, h);
     fill(0);
-    text(name,x+w/2,y+h/2);
-    
+    text(name, x+w/2, y+h/2);
   }
 
   void click(float mX, float mY) {

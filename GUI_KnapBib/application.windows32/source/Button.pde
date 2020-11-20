@@ -1,7 +1,6 @@
 class Button {
-  PApplet p; //import af alle processings lort 
   Action a; //strategy
- 
+
 
   int x, y, w, h;
   String name; 
@@ -9,8 +8,7 @@ class Button {
   float mX;
   float mY;
 
-  Button(int tempX, int tempY, int tempW, int tempH, String tempName,PApplet p) {
-    p = this.p;
+  Button(int tempX, int tempY, int tempW, int tempH, String tempName) {
     x = tempX; 
     y = tempY; 
     w = tempW; 

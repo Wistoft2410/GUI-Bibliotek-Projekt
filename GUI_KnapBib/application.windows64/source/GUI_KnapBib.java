@@ -14,9 +14,9 @@ import java.io.IOException;
 
 public class GUI_KnapBib extends PApplet {
 
-Button buttonTerning6 = new Button(10, 10, 150, 50, "Slå med 6s terning!");
-Button buttonTerning10 = new Button(340, 10, 150, 50, "Slå med 10s terning!");
-Button buttonTerning420 = new Button(175, 10, 150, 50, "Slå med 420s terning!");
+Button buttonTerning6 = new Button(10, 10, 150, 50, "Slå med 6s terning!",this);
+Button buttonTerning10 = new Button(340, 10, 150, 50, "Slå med 10s terning!",this);
+Button buttonTerning420 = new Button(175, 10, 150, 50, "Slå med 420s terning!",this);
 
 int sum;
 int terningeKast;
@@ -28,7 +28,7 @@ public void setup() {
   //AIK for terning der kaster med value 6
   buttonTerning6.addAction(new Action() {
 
-    Terning t6 = new Terning(6);
+    Terning t6 = new Terning(6,GUI_KnapBib.this);
 
     public void execute() {
       t6.kast(); 
@@ -40,7 +40,7 @@ public void setup() {
   //Anonym indre klasse (AIK) 
   //AIK for terning der kaster med værdi 10
   buttonTerning10.addAction(new Action() {   
-    Terning t10 = new Terning(6);
+    Terning t10 = new Terning(6,GUI_KnapBib.this);
     public void execute() {
       t10.kast();
     }
@@ -50,7 +50,7 @@ public void setup() {
   //Anonym indre klasse (AIK) 
   //AIK for terning der kaster med værdi 420
   buttonTerning420.addAction(new Action() {   
-    Terning t420 = new Terning(420);
+    Terning t420 = new Terning(420,GUI_KnapBib.this);
     public void execute() {
       t420.kast();
     }
@@ -69,15 +69,16 @@ public void draw() {
 }
 
 public void mousePressed() {
-  buttonTerning6.click(mouseX, mouseY);
-  buttonTerning10.click(mouseX, mouseY);
-  buttonTerning420.click(mouseX, mouseY);
+  buttonTerning6.click();
+  buttonTerning10.click();
+  buttonTerning420.click();
 }
 //Den tomme interface, som er klar til at modtage kode i execute functionen
 interface Action { public void execute(); }
 class Button {
+  PApplet p; //import af alle processings lort 
   Action a; //strategy
-
+ 
 
   int x, y, w, h;
   String name; 
@@ -85,7 +86,8 @@ class Button {
   float mX;
   float mY;
 
-  Button(int tempX, int tempY, int tempW, int tempH, String tempName) {
+  Button(int tempX, int tempY, int tempW, int tempH, String tempName,PApplet p) {
+    this.p = p;
     x = tempX; 
     y = tempY; 
     w = tempW; 
@@ -98,29 +100,30 @@ class Button {
   }
 
   public void display() {
-    fill(255);
-    rect(x, y, w, h);
-    fill(0);
-    text(name, x+w/2, y+h/2);
+    p.fill(255);
+    p.rect(x, y, w, h);
+    p.fill(0);
+    p.text(name, x+w/2, y+h/2);
   }
 
-  public void click(float mX, float mY) {
-    if (mX > x && mX < x + w && mY > y && mY < y + h) {
-      println("clicked");
+  public void click() {
+    if (p.mouseX > x && p.mouseX < x + w && p.mouseY > y && p.mouseY < y + h) {
       a.execute();
     }
   }
 }
 class Terning {
-
+  PApplet p; 
+  
   int value; 
 
-  Terning(int tempVal) {
+  Terning(int tempVal,PApplet p) {
+    this.p = p; 
     value = tempVal;
   }
 
   public void kast() {
-    terningeKast = PApplet.parseInt(random(1, value));
+    terningeKast = (int)p.random(1, value);
     sum += terningeKast;
   }
 }

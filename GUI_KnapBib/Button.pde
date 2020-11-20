@@ -10,7 +10,7 @@ class Button {
   float mY;
 
   Button(int tempX, int tempY, int tempW, int tempH, String tempName,PApplet p) {
-    p = this.p;
+    this.p = p;
     x = tempX; 
     y = tempY; 
     w = tempW; 
@@ -23,15 +23,14 @@ class Button {
   }
 
   void display() {
-    fill(255);
-    rect(x, y, w, h);
-    fill(0);
-    text(name, x+w/2, y+h/2);
+    p.fill(255);
+    p.rect(x, y, w, h);
+    p.fill(0);
+    p.text(name, x+w/2, y+h/2);
   }
 
-  void click(float mX, float mY) {
-    if (mX > x && mX < x + w && mY > y && mY < y + h) {
-      println("clicked");
+  void click() {
+    if (p.mouseX > x && p.mouseX < x + w && p.mouseY > y && p.mouseY < y + h) {
       a.execute();
     }
   }

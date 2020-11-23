@@ -14,9 +14,10 @@ import java.io.IOException;
 
 public class GUI_KnapBib extends PApplet {
 
-Button buttonTerning6 = new Button(10, 10, 150, 50, "Slå med 6s terning!",this);
-Button buttonTerning10 = new Button(340, 10, 150, 50, "Slå med 10s terning!",this);
-Button buttonTerning420 = new Button(175, 10, 150, 50, "Slå med 420s terning!",this);
+Button buttonTerning6 = new Button(10, 10, 150, 50, "Slå med 6s terning!", this);
+Button buttonTerning10 = new Button(340, 10, 150, 50, "Slå med 10s terning!", this);
+Button buttonTerning420 = new Button(175, 10, 150, 50, "Slå med 420s terning!", this);
+Button buttonTerningSnyde = new Button(175, 10, 150, 50, "Slå med 420s terning!", this);
 
 int sum;
 int terningeKast;
@@ -27,9 +28,7 @@ public void setup() {
   //Anonym indre klasse (AIK)  
   //AIK for terning der kaster med value 6
   buttonTerning6.addAction(new Action() {
-
-    Terning t6 = new Terning(6,GUI_KnapBib.this);
-
+    Terning t6 = new Terning(6, GUI_KnapBib.this);
     public void execute() {
       t6.kast(); 
       //terningeKast = int(random(1, 6));
@@ -40,7 +39,7 @@ public void setup() {
   //Anonym indre klasse (AIK) 
   //AIK for terning der kaster med værdi 10
   buttonTerning10.addAction(new Action() {   
-    Terning t10 = new Terning(6,GUI_KnapBib.this);
+    Terning t10 = new Terning(10, GUI_KnapBib.this);
     public void execute() {
       t10.kast();
     }
@@ -50,13 +49,14 @@ public void setup() {
   //Anonym indre klasse (AIK) 
   //AIK for terning der kaster med værdi 420
   buttonTerning420.addAction(new Action() {   
-    Terning t420 = new Terning(420,GUI_KnapBib.this);
+    Terning t420 = new Terning(420, GUI_KnapBib.this);
     public void execute() {
       t420.kast();
     }
   }
   );
 }
+
 public void draw() {
   clear();
   buttonTerning6.display();
@@ -78,7 +78,7 @@ interface Action { public void execute(); }
 class Button {
   PApplet p; //import af alle processings lort 
   Action a; //strategy
- 
+
 
   int x, y, w, h;
   String name; 
@@ -86,7 +86,7 @@ class Button {
   float mX;
   float mY;
 
-  Button(int tempX, int tempY, int tempW, int tempH, String tempName,PApplet p) {
+  Button(int tempX, int tempY, int tempW, int tempH, String tempName, PApplet p) {
     this.p = p;
     x = tempX; 
     y = tempY; 
@@ -114,19 +114,26 @@ class Button {
 }
 class Terning {
   PApplet p; 
-  
   int value; 
+  int terningKast;
 
-  Terning(int tempVal,PApplet p) {
+  Terning(int tempVal, PApplet p) {
     this.p = p; 
     value = tempVal;
   }
 
-  public void kast() {
-    terningeKast = (int)p.random(1, value);
+  public int kast() {
+    /*
+    Når man bruger value: 
+    Så kan man kun få den laveste, 
+    men ikke den højeste værdi som output, derfor skriver man "value+1"
+    */
+    terningeKast = (int)p.random(1, value+1); 
     sum += terningeKast;
+    return terningeKast;
   }
 }
+
   public void settings() {  size(500, 300); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "GUI_KnapBib" };

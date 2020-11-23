@@ -3,37 +3,51 @@ GUI_KnapBib.Button BT10 = (new GUI_KnapBib()).new Button(340, 10, 150, 50, "Slå
 GUI_KnapBib.Button BT420 = (new GUI_KnapBib()).new Button(175, 10, 150, 50, "Slå med 420s terning!", this);
 
 int sum;
+int value;
 int terningeKast;
+
 static public PApplet p;
+
 public void setup() {
   size(500, 300);
-p =this;
+  p=this;
+
   BT6.addAction(new GUI_KnapBib.Action() {
-    PApplet pp;
-    GUI_KnapBib.Terning t6 = new GUI_KnapBib.Terning(8,p);
+    
+    GUI_KnapBib b = new GUI_KnapBib() ;
+    GUI_KnapBib.Terning t6 = b.new Terning(6, AnvendBib.this);
+    
     public void execute() {
-      t6.kast();
+      terningeKast = t6.kast();
+      sum += t6.value;
     }
   }
   );
 
   BT10.addAction(new GUI_KnapBib.Action() {   
-    GUI_KnapBib.Terning t10 = new Terning(6, this);
+    
+    GUI_KnapBib b = new GUI_KnapBib() ;
+    GUI_KnapBib.Terning t10 = b.new Terning(10, AnvendBib.this);
+    
     public void execute() {
       t10.kast();
+      sum += t10.value;
     }
   }
   );
 
   BT420.addAction(new GUI_KnapBib.Action() {   
-    GUI_KnapBib.Terning t420 = new Terning(420, this);
+    
+    GUI_KnapBib b = new GUI_KnapBib() ;
+    GUI_KnapBib.Terning t420 = b.new Terning(420, AnvendBib.this);
+    
     public void execute() {
-      t420.kast();
+      t420.kast(); 
+      sum += t420.value;
     }
   }
   );
 }
-
 
 public void draw() {
   clear();
@@ -47,7 +61,7 @@ public void draw() {
 }
 
 void mousePressed() {
-  BT6.click();
+  BT6.click(); 
   BT10.click();
   BT420.click();
 }

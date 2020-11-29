@@ -30,7 +30,7 @@ public void setup() {
     GUI_KnapBib.Terning t10 = b.new Terning(10, AnvendBib.this);
     
     public void execute() {
-      t10.kast();
+      terningeKast = t10.kast();
       sum += t10.value;
     }
   }
@@ -42,7 +42,7 @@ public void setup() {
     GUI_KnapBib.Terning t420 = b.new Terning(420, AnvendBib.this);
     
     public void execute() {
-      t420.kast(); 
+      terningeKast = t420.kast(); 
       sum += t420.value;
     }
   }
